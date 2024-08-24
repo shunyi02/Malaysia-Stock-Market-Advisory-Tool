@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #fff;
+            color: #000;
+        }
+        table {
+            width: 50%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            border: 1px solid #000;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        td.stock-name {
+            border-right: 1px solid #ddd; /* Add border between stock name and code */
+        }
+        .btn {
+            background-color: #000000;
+        }
+        .back-button {
+            text-align: center;
+            margin-top: 20px; /* Add space above the button */
+            margin-bottom: 20px; /* Add space below the button */
+        }
+        h1 {
+            background-color: #000;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <h1 class="text-center mb-4">Stock Price Prediction</h1>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <form action="/predict" method="post">
+                            <div class="mb-3">
+                                <label for="symbol" class="form-label">Investment Recommendation:</label>
+                                <input type="text" id="symbol" name="symbol" class="form-control" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Predict</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <form action="/prediction_five_days" method="post">
+                            <div class="mb-3">
+                                <label for="symbol_five_days" class="form-label">Next 5 Days Prediction:</label>
+                                <input type="text" id="symbol_five_days" name="symbol" class="form-control" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Predict</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4 text-center">
+            <h3>Stock Codes</h3>
+            <table>
+                <tr>
+                    <th>Stock Name</th>
+                    <th>Stock Code</th>
+                </tr>
+                {% for row in table_data %}
+                <tr>
+                    <td class="stock-name">{{ row[0] }}</td>
+                    <td><a href="#" class="stock-code" data-code="{{ row[1] }}">{{ row[1] }}</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-4 back-button">
+                <a href="/" class="btn btn-primary">Back to Main Page</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const stockCodeLinks = document.querySelectorAll('.stock-code');
+            stockCodeLinks.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const stockCode = this.getAttribute('data-code');
+                    document.getElementById('symbol').value = stockCode;
+                    document.getElementById('symbol_five_days').value = stockCode;
+
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

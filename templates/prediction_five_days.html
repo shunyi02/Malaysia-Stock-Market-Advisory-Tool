@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Price Prediction - Next 5 Days</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='result.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 8px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f0f0f0;
+        }
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #007bff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Stock Price Prediction - Next 5 Days</h1>
+        <h2>{{ stock_name }} ({{ symbol }})</h2>
+        <p>Current Time: {{ current_time }}</p>
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Predicted Price</th>
+            </tr>
+            {% for prediction in predicted_prices %}
+            <tr>
+                <td>{{ prediction[0] }}</td>
+                <td>{{ '%.2f'|format(prediction[1]) }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <a href="{{ url_for('prediction') }}">Back to Prediction Page</a>
+    </div>
+</body>
+</html>

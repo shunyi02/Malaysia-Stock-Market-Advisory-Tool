@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stock Price Prediction Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .header {
+            background-color: #000;
+            color: #fff;
+            padding: 15px 0;
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .stock-details {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .stock-details h2 {
+            margin-top: 0;
+        }
+
+        .prediction-details {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .prediction-details h3 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 0;
+        }
+
+        .back-button {
+            display: block;
+            width: 100px;
+            margin: 20px auto;
+            padding: 10px;
+            text-align: center;
+            background-color: #000;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+
+        .last-updated {
+            margin-top: 20px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Stock Price Prediction Result</h1>
+    </div>
+    <div class="content">
+        <div class="stock-details">
+            <h2>{{ stock_name }}</h2>
+            <h3>{{ stock_code }}</h3>
+            <p>Last Known Price: {{ '%.2f'|format(last_known_price) }}</p>
+        </div>
+        <div class="prediction-details">
+            <h3>Predicted Price for Tomorrow</h3>
+            <p style="font-size: 24px;">{{ '%.2f'|format(prediction) }}</p>
+            <h3>Recommendation</h3>
+            <p style="font-size: 24px;">{{ recommendation }}</p>
+            <p>MSE for Tomorrow's Prediction: {{ mse }}</p>
+            <p>RMSE for Tomorrow's Prediction: {{ rmse }}</p>
+        </div>
+    </div>
+    <p class="last-updated">Last Updated: {{ current_time }}</p>
+    <a href="/prediction" class="back-button">Back to Main</a>
+</body>
+</html>
